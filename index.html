@@ -4,7 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOP Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://png.pngtree.com/background/20230616/original/pngtree-faceted-abstract-background-in-3d-with-shimmering-iridescent-metallic-texture-of-picture-image_3653595.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin: 50px auto;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .sop-container {
+            max-width: 800px;
+            padding: 30px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center; 
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -36,12 +99,116 @@
 
     <div class="sop-container" style="display: none;">
         <h1>Your Generated SOP</h1>
-        <div id="sopOutput" class="sop-output"></div>
         <button id="downloadTxt">Download as TXT</button>
         <button id="downloadPdf">Download as PDF</button>
         <button id="goBack">Go Back</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('sopForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const program = document.getElementById('program').value;
+            const background = document.getElementById('background').value;
+            const experience = document.getElementById('experience').value;
+            const goals = document.getElementById('goals').value;
+
+            const sopContent = `
+                Statement of Purpose
+
+                Name: ${name}
+
+                Educational Program: ${program}
+
+                Academic Background: ${background}
+
+                Experience: ${experience}
+
+                Career Goals: ${goals}
+            `;
+
+            localStorage.setItem('sopContent', sopContent);
+            showSopOutput(name, program, background, experience, goals);
+        });
+
+        function showSopOutput(name, program, background, experience, goals) {
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.sop-container').style.display = 'block';
+
+            document.getElementById('downloadTxt').addEventListener('click', function() {
+                const sopContent = localStorage.getItem('sopContent');
+                const blob = new Blob([sopContent], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'SOP.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            document.getElementById('downloadPdf').addEventListener('click', function() {
+                const pdfWindow = window.open('', '', 'width=600,height=800');
+                pdfWindow.document.write(`
+                    <html>
+                        <head>
+                            <title>Your SOP</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    margin: 20px;
+                                    background: url('https://png.pngtree.com/background/20230616/original/pngtree-faceted-abstract-background-in-3d-with-shimmering-iridescent-metallic-texture-of-picture-image_3653595.jpg') no-repeat center center fixed;
+                                    background-size: cover;
+                                }
+                                h1 {
+                                    text-align: center;
+                                    font-size: 32px;
+                                }
+                                h2 {
+                                    text-decoration: underline;
+                                    font-size: 24px;
+                                    margin: 10px 0;
+                                }
+                                h4 {
+                                    font-size: 32px;
+                                    margin: 10px 0;
+                                }
+                                p {
+                                    font-size: 18px;
+                                    margin: 5px 0 15px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Statement of Purpose</h1>
+                            
+                            <h4>${name}<br></h4>
+
+                            <h2>Educational Program</h2>
+                            <p>${program}<br><br></p>
+                            
+                            
+                            <h2>Academic Background</h2>
+                            <p>${background}<br><br></p>
+                            
+                            
+                            <h2>Experience</h2>
+                            <p>${experience}<br><br></p>
+                            
+                            
+                            <h2>Career Goals</h2>
+                            <p>${goals}<br></p>
+                        </body>
+                    </html>
+                `);
+                pdfWindow.document.close();
+                pdfWindow.print();
+            });
+
+            document.getElementById('goBack').addEventListener('click', function() {
+                window.location.reload(); 
+            });
+        }
+    </script>
 </body>
 </html>

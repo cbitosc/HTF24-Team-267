@@ -7,29 +7,30 @@ document.getElementById('sopForm').addEventListener('submit', function(event) {
     const experience = document.getElementById('experience').value;
     const goals = document.getElementById('goals').value;
 
-    const sop = `
-        My name is ${name}. I am applying for the ${program} program. 
-        My academic background: ${background}. 
-        Relevant experiences that I have: ${experience}. 
-        My career goals: ${goals}.
+    const sopContent = `
+        Statement of Purpose
+
+        Name: ${name}
+
+        Educational Program: ${program}
+
+        Academic Background: ${background}
+
+        Experience: ${experience}
+
+        Career Goals: ${goals}
     `;
 
-    localStorage.setItem('sopContent', sop);
-    showSopOutput();
+    localStorage.setItem('sopContent', sopContent);
+    showSopOutput(name, program, background, experience, goals);
 });
 
-function showSopOutput() {
-    const sopOutput = document.getElementById('sopOutput');
-    const sopContent = localStorage.getItem('sopContent');
-
-    if (sopContent) {
-        sopOutput.textContent = sopContent;
-    }
-
+function showSopOutput(name, program, background, experience, goals) {
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.sop-container').style.display = 'block';
 
     document.getElementById('downloadTxt').addEventListener('click', function() {
+        const sopContent = localStorage.getItem('sopContent');
         const blob = new Blob([sopContent], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -40,12 +41,59 @@ function showSopOutput() {
     });
 
     document.getElementById('downloadPdf').addEventListener('click', function() {
-        const pdfContent = `
-            <h1>Your Generated SOP</h1>
-            <p>${sopContent.replace(/\n/g, '<br>')}</p>
-        `;
-        const pdfWindow = window.open('', '', 'width=600,height=400');
-        pdfWindow.document.write(`<html><head><title>Your SOP</title></head><body>${pdfContent}</body></html>`);
+        const pdfWindow = window.open('', '', 'width=600,height=800');
+        pdfWindow.document.write(`
+            <html>
+                        <head>
+                            <title>Your SOP</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    margin: 20px;
+                                    background: url('https://png.pngtree.com/background/20230616/original/pngtree-faceted-abstract-background-in-3d-with-shimmering-iridescent-metallic-texture-of-picture-image_3653595.jpg') no-repeat center center fixed;
+                                    background-size: cover;
+                                }
+                                h1 {
+                                    text-align: center;
+                                    font-size: 32px;
+                                }
+                                h2 {
+                                    text-decoration: underline;
+                                    font-size: 24px;
+                                    margin: 10px 0;
+                                }
+                                h4 {
+                                    font-size: 32px;
+                                    margin: 10px 0;
+                                }
+                                p {
+                                    font-size: 18px;
+                                    margin: 5px 0 15px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <h1>Statement of Purpose</h1>
+                            
+                            <h4>${name}<br></h4>
+
+                            <h2>Educational Program</h2>
+                            <p>${program}<br><br></p>
+                            
+                            
+                            <h2>Academic Background</h2>
+                            <p>${background}<br><br></p>
+                            
+                            
+                            <h2>Experience</h2>
+                            <p>${experience}<br><br></p>
+                            
+                            
+                            <h2>Career Goals</h2>
+                            <p>${goals}<br></p>
+                        </body>
+                    </html>
+        `);
         pdfWindow.document.close();
         pdfWindow.print();
     });
