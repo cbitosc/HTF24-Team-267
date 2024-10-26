@@ -67,7 +67,7 @@ button:hover {
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Center text */
+    text-align: center; 
 }
 
 .sop-output {
@@ -76,7 +76,9 @@ button:hover {
     background: #e9ecef;
     border: 1px solid #ddd;
     border-radius: 5px;
-    white-space: pre-wrap; /* Preserve formatting */
-    max-height: 500px; /* Increase height */
-    overflow-y: auto; /* Allow scrolling if needed */
+    white-space: pre-wrap; 
+    max-height: 500px; 
+    overflow-y: auto; 
 }
+
+

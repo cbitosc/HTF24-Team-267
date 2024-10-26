@@ -1,4 +1,3 @@
-// Handle form submission and generate SOP
 document.getElementById('sopForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -9,17 +8,16 @@ document.getElementById('sopForm').addEventListener('submit', function(event) {
     const goals = document.getElementById('goals').value;
 
     const sop = `
-        My name is ${name}, and I am applying for the ${program}. 
-        My academic background includes: ${background}. 
-        In terms of relevant experience, I have: ${experience}. 
-        My career goals are: ${goals}.
+        My name is ${name}. I am applying for the ${program} program. 
+        My academic background: ${background}. 
+        Relevant experiences that I have: ${experience}. 
+        My career goals: ${goals}.
     `;
 
     localStorage.setItem('sopContent', sop);
     showSopOutput();
 });
 
-// Show the generated SOP output
 function showSopOutput() {
     const sopOutput = document.getElementById('sopOutput');
     const sopContent = localStorage.getItem('sopContent');
@@ -53,6 +51,6 @@ function showSopOutput() {
     });
 
     document.getElementById('goBack').addEventListener('click', function() {
-        window.location.reload(); // Refresh to show the form again
+        window.location.reload(); 
     });
 }
