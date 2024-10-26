@@ -2,16 +2,21 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8;
+    background: linear-gradient(to right, #f0f4f8, #c0d8e8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .container {
     max-width: 600px;
-    margin: 50px auto;
     padding: 30px;
     background: white;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
 h1, h2 {
@@ -19,9 +24,13 @@ h1, h2 {
     text-align: center;
 }
 
+.form-group {
+    margin-bottom: 20px;
+}
+
 label {
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
     font-weight: bold;
 }
 
@@ -30,12 +39,14 @@ input, textarea {
     padding: 12px;
     margin-top: 5px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    transition: border-color 0.3s;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 input:focus, textarea:focus {
     border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
 button {
@@ -47,11 +58,12 @@ button {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.3s;
 }
 
 button:hover {
     background: #0056b3;
+    transform: translateY(-2px);
 }
 
 .sop-output {
@@ -60,4 +72,21 @@ button:hover {
     background: #e9ecef;
     border: 1px solid #ddd;
     border-radius: 5px;
+    display: none; /* Initially hidden */
+}
+
+.sop-output.show {
+    display: block;
+    animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

@@ -10,29 +10,28 @@
     <div class="container">
         <h1>Statement of Purpose Generator</h1>
         <form id="sopForm">
-            <div>
+            <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="program">Program of Study:</label>
                 <input type="text" id="program" required>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="background">Academic Background:</label>
                 <textarea id="background" rows="4" required></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="experience">Relevant Experience:</label>
                 <textarea id="experience" rows="4" required></textarea>
             </div>
-            <div>
+            <div class="form-group">
                 <label for="goals">Career Goals:</label>
                 <textarea id="goals" rows="4" required></textarea>
             </div>
             <button type="submit">Generate SOP</button>
         </form>
-        <h2>Generated SOP</h2>
         <div id="sopOutput" class="sop-output"></div>
     </div>
     <script src="script.js"></script>

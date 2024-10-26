@@ -8,11 +8,14 @@ document.getElementById('sopForm').addEventListener('submit', function(event) {
     const goals = document.getElementById('goals').value;
 
     const sop = `
-        <p>My name is ${name}, and I am applying for the ${program}. </p>
-        <p>My academic background includes: ${background}.</p>
-        <p>In terms of relevant experience, I have: ${experience}.</p>
-        <p>My career goals are: ${goals}.</p>
+        <h2>Your Generated SOP</h2>
+        <p>My name is <strong>${name}</strong>, and I am applying for the <strong>${program}</strong>.</p>
+        <p>My academic background includes: <strong>${background}</strong>.</p>
+        <p>In terms of relevant experience, I have: <strong>${experience}</strong>.</p>
+        <p>My career goals are: <strong>${goals}</strong>.</p>
     `;
 
-    document.getElementById('sopOutput').innerHTML = sop;
+    const sopOutput = document.getElementById('sopOutput');
+    sopOutput.innerHTML = sop;
+    sopOutput.classList.add('show');
 });
