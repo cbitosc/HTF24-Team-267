@@ -75,7 +75,7 @@ function showSopOutput(name, program, background, experience, goals) {
                         <body>
                             <h1>Statement of Purpose</h1>
                             
-                            <h4>${name}<br></h4>
+                            <h4>${name}<br><br></h4>
 
                             <h2>Educational Program</h2>
                             <p>${program}<br><br></p>
