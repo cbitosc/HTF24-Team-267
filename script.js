@@ -26,12 +26,26 @@ document.getElementById('sopForm').addEventListener('submit', function(event) {
 });
 
 function showSopOutput(name, program, background, experience, goals) {
+    const sopPreview = document.getElementById('sopPreview');
+    sopPreview.innerHTML = `
+        <h2>Statement of Purpose</h2>
+        <h3>Name</h3>
+        <p>${name}</p>
+        <h3>Educational Program</h3>
+        <p>${program}</p>
+        <h3>Academic Background</h3>
+        <p>${background}</p>
+        <h3>Experience</h3>
+        <p>${experience}</p>
+        <h3>Career Goals</h3>
+        <p>${goals}</p>
+    `;
+
     document.querySelector('.container').style.display = 'none';
     document.querySelector('.sop-container').style.display = 'block';
 
     document.getElementById('downloadTxt').addEventListener('click', function() {
-        const sopContent = localStorage.getItem('sopContent');
-        const blob = new Blob([sopContent], { type: 'text/plain' });
+        const blob = new Blob([localStorage.getItem('sopContent')], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -40,24 +54,30 @@ function showSopOutput(name, program, background, experience, goals) {
         URL.revokeObjectURL(url);
     });
 
-    document.getElementById('downloadPdf').addEventListener('click', function() {
-        const pdfWindow = window.open('', '', 'width=600,height=800');
-        pdfWindow.document.write(`
-            <html>
-                        <head>
-                            <title>Your SOP</title>
-                            <style>
-                                body {
-                                    font-family: Arial, sans-serif;
-                                    margin: 20px;
-                                    background: url('https://png.pngtree.com/background/20230616/original/pngtree-faceted-abstract-background-in-3d-with-shimmering-iridescent-metallic-texture-of-picture-image_3653595.jpg') no-repeat center center fixed;
-                                    background-size: cover;
-                                }
-                                h1 {
-                                    text-align: center;
-                                    font-size: 32px;
-                                }
-                                h2 {
+document.getElementById('downloadPdf').addEventListener('click', function() {
+    const pdfWindow = window.open('', '', 'width=600,height=800');
+    pdfWindow.document.write(`
+        <html>
+            <head>
+                <title>Your SOP</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 20px;
+                        background: url('https://png.pngtree.com/background/20230616/original/pngtree-faceted-abstract-background-in-3d-with-shimmering-iridescent-metallic-texture-of-picture-image_3653595.jpg') no-repeat center center fixed;
+                        background-size: cover;
+                    }
+                    .content {
+                        background: rgba(255, 255, 255, 0.8); /* Translucent white */
+                        padding: 20px;
+                        border-radius: 10px;
+                    }
+                    h1 {
+                        text-align: center;
+                        font-size: 32px;
+                    }
+                    h2 {
                                     text-decoration: underline;
                                     font-size: 24px;
                                     margin: 10px 0;
@@ -93,10 +113,11 @@ function showSopOutput(name, program, background, experience, goals) {
                             <p>${goals}<br></p>
                         </body>
                     </html>
-        `);
-        pdfWindow.document.close();
-        pdfWindow.print();
-    });
+    `);
+    pdfWindow.document.close();
+    pdfWindow.print();
+});
+
 
     document.getElementById('goBack').addEventListener('click', function() {
         window.location.reload(); 
