@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Statement of Purpose Generator</h1>
+        <form id="sopForm">
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="program">Program of Study:</label>
+                <input type="text" id="program" required>
+            </div>
+            <div class="form-group">
+                <label for="background">Academic Background:</label>
+                <textarea id="background" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="experience">Relevant Experience:</label>
+                <textarea id="experience" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="goals">Career Goals:</label>
+                <textarea id="goals" rows="4" required></textarea>
+            </div>
+            <button type="submit">Generate SOP</button>
+        </form>
+    </div>
+
+    <div class="sop-container" style="display: none;">
+        <h1>Your Generated SOP</h1>
+        <button id="downloadTxt">Download as TXT</button>
+        <button id="downloadPdf">Download as PDF</button>
+        <button id="goBack">Go Back</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
